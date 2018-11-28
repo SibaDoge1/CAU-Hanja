@@ -3,6 +3,7 @@ package com.example.melon.cauhanja;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class MenuActivity extends AppCompatActivity {
@@ -23,6 +24,16 @@ public class MenuActivity extends AppCompatActivity {
 
         menu_Member = (TextView)findViewById(R.id.menu_member);
 
-        menu_Member.setText("회원번호 : "+memberNumber);
+        menu_Member.setText("회원번호 : " + memberNumber);
+    }
+
+    public void onClickExam(View v){
+        Intent intent = new Intent(this,ExamActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickWord(View v){
+        Intent intent = new Intent(this,WordListActivity.class);
+        startActivity(intent);
     }
 }
