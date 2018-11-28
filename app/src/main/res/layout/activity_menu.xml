@@ -29,10 +29,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/menu_exam"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
+                android:onClick="onClickExam"
                 android:text="모의고사" />
 
             <Button
@@ -45,11 +46,12 @@
                 android:text="Button" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/menu_word"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:onClick="onClickWord"
+                android:text="한자보기" />
         </LinearLayout>
 
         <LinearLayout

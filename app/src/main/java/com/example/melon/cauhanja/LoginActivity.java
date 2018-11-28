@@ -62,10 +62,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 catch (Exception e) {
+
                     e.printStackTrace();
                 }
             }
         };
+
         LoginRequest loginRequest = new LoginRequest(id, pass, responseListener);
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
         queue.add(loginRequest);
@@ -100,6 +102,7 @@ class LoginRequest extends StringRequest {
         parameters = new HashMap<>();
         parameters.put("memberID", id);
         parameters.put("memberPW", pw);
+
     }
 
     @Override
