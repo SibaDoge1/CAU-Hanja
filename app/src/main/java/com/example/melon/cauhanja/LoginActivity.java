@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         intent.getIntExtra("Member_Number",memberNumber);
                         startActivity(intent);
+                        finish();
                     }
                     else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
@@ -80,6 +81,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void ondClickButton3(View v){
         //TODO Button3 click event
+        //메뉴창으로 이동 - 로그인안될때
+        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+        intent.getIntExtra("Member_Number",memberNumber);
+        startActivity(intent);
+        finish();
     }
 
     @Override

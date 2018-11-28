@@ -33,7 +33,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void onClickWord(View v){
-        Intent intent = new Intent(this,WordActivity.class);
+        Intent intent = new Intent(this,WordListActivity.class);
         startActivity(intent);
     }
 }
