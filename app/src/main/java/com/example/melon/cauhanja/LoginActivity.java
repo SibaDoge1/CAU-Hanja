@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText login_pass;
 
     private int memberNumber; // DB로 부터 받아오는 회원 id (키)
+    private String memberName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,11 @@ public class LoginActivity extends AppCompatActivity {
                         String memberID = jsonResponse.getString("memberID");
                         String memberPW = jsonResponse.getString("memberPW");
                         memberNumber = jsonResponse.getInt("memberNumber");
+                        memberName = jsonResponse.getString("memberName");
 
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                        intent.getIntExtra("Member_Number",memberNumber);
+                        intent.putExtra("Member_Number",memberNumber);
+                        intent.putExtra("Member_Name",memberName);
                         startActivity(intent);
                         finish();
                     }

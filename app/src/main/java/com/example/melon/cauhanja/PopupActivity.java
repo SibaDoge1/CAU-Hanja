@@ -1,13 +1,13 @@
 package com.example.melon.cauhanja;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,29 +15,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.melon.cauhanja.Manager.WordManager;
-
-import java.util.ArrayList;
-
-public class WordListActivity extends AppCompatActivity {
+public class PopupActivity extends Activity {
 
     private ListView listView;
-    private WordManager wordManager;
-    private ArrayList<String> wordList;
-    private int level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_list);
+        setContentView(R.layout.activity_popup);
 
-        Intent intent = getIntent();
-        level = intent.getIntExtra("Level",0);
+        String[] items = {"8급","7급","6급","5급","준4급","4급","준3급","3급","2급","1급"};
 
-        wordManager = WordManager.getInstance(this);
-        wordList = wordManager.getWordList(level);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.wordlist_item, wordList){
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.wordlist_item, items){
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -47,22 +36,25 @@ public class WordListActivity extends AppCompatActivity {
                 return view;
             }
         };
-        listView = (ListView) findViewById(R.id.wordList);
+        listView = (ListView) findViewById(R.id.popup_List);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                String str[] = wordList.get(position).split("\t");
-                if(str.length > 1) {
-                    Intent intent = new Intent(getApplicationContext(), WordActivity.class);
-                    intent.putExtra("Hanja", str[0]);
-                    intent.putExtra("Mean",str[1]);
-                    intent.putExtra("Index",position);
-                    intent.putExtra("Level",level);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(getApplicationContext(), WordListActivity.class);
+                intent.putExtra("Level",position);
+                startActivity(intent);
+                finish();
             }
         });
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+            return false;
+        }
+        return true;
     }
 }

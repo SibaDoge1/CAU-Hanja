@@ -23,29 +23,34 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/word_Prev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="35dp"
+        android:layout_below="@+id/word_Mean"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         android:layout_toStartOf="@+id/word_hanja"
-        android:text="Button" />
+        android:onClick="onClickPrev"
+        android:text="이전" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/word_Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
+        android:layout_below="@+id/word_Mean"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_toEndOf="@+id/word_hanja"
-        android:text="Button" />
+        android:onClick="onClickNext"
+        android:text="다음" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/word_GoList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button4"
+        android:layout_below="@+id/word_Mean"
         android:layout_centerHorizontal="true"
-        android:text="Button" />
+        android:layout_marginTop="20dp"
+        android:onClick="onClickGoList"
+        android:text="목록으로" />
 </RelativeLayout>
