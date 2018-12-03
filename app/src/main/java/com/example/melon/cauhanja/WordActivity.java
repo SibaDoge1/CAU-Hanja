@@ -12,10 +12,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.melon.cauhanja.Manager.WordManager;
+
+import java.util.ArrayList;
+
 public class WordActivity extends AppCompatActivity {
 
     private TextView hanja;
     private TextView mean;
+    private int level;
+    private int index;
+    private ArrayList<String> wordList;
+    private WordManager wordManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +39,37 @@ public class WordActivity extends AppCompatActivity {
 
         hanja.setText(intent.getStringExtra("Hanja"));
         mean.setText(intent.getStringExtra("Mean"));
+
+        level = intent.getIntExtra("Level",0);
+        index = intent.getIntExtra("Index",0);
+
+        wordManager = WordManager.getInstance(this);
+        wordList = wordManager.getWordList(level);
+    }
+
+    public void onClickNext(View v){
+        if(index != wordList.size()) {
+            index++;
+        }
+
+        String str[] = wordList.get(index).split("\t");
+
+        hanja.setText(str[0]);
+        mean.setText(str[1]);
+    }
+
+    public void onClickPrev(View v){
+        if(index != 0) {
+            index--;
+        }
+
+        String str[] = wordList.get(index).split("\t");
+
+        hanja.setText(str[0]);
+        mean.setText(str[1]);
+    }
+
+    public void onClickGoList(View v){
+        finish();
     }
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.melon.cauhanja">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -34,6 +36,8 @@
         <activity
             android:name=".WordListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".PopupActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"/>
     </application>
 
 </manifest>
