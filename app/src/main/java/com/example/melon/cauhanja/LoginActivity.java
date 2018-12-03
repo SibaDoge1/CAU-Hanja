@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     }
                     else {
+                        Log.d("Tag", "clicked2");
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                         dialog = builder.setMessage("Failed").setNegativeButton("Retry", null).create();
                         dialog.show();
@@ -108,7 +109,6 @@ class LoginRequest extends StringRequest {
         parameters = new HashMap<>();
         parameters.put("memberID", id);
         parameters.put("memberPW", pw);
-
     }
 
     @Override
