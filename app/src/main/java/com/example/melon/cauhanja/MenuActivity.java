@@ -37,4 +37,9 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PopupActivity.class);
         startActivity(intent);
     }
+
+    public void onClickStat(View v){
+        Intent intent = new Intent(this, UserStatActivity.class);
+        startActivity(intent);
+    }
 }
