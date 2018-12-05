@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,29 +13,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.melon.cauhanja.Manager.WordManager;
+import com.example.melon.cauhanja.Manager.HistoryManager;
 
 import java.util.ArrayList;
 
-public class WordListActivity extends AppCompatActivity {
-
+public class TestHistoryActivity extends AppCompatActivity {
     private ListView listView;
-    private WordManager wordManager;
-    private ArrayList<String> wordList;
-    private int level;
+    private ArrayList<String> historyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_list);
+        setContentView(R.layout.activity_test_history);
 
         Intent intent = getIntent();
-        level = intent.getIntExtra("Level",0);
-
-        wordManager = WordManager.getInstance(this);
-        wordList = wordManager.getWordList(level);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.wordlist_item, wordList){
+/*
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.testhistory_item , historyList){
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -49,7 +40,6 @@ public class WordListActivity extends AppCompatActivity {
         };
         listView = (ListView) findViewById(R.id.wordList);
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -64,5 +54,6 @@ public class WordListActivity extends AppCompatActivity {
                 }
             }
         });
+        */
     }
 }

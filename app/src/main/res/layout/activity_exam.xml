@@ -137,6 +137,17 @@
 
             </RadioGroup>
 
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="271dp"
+                android:layout_marginTop="432dp"
+                android:onClick="OnClickTest"
+                android:text="테스트용버튼" />
+
         </RelativeLayout>
     </ScrollView>
 

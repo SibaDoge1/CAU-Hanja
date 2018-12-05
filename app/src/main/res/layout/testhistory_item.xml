@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_columnWeight="0"
+    android:layout_weight="0"
+    android:background="@android:color/holo_blue_dark">
+
+    <TextView
+        android:id="@+id/asdasd"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="3dp"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/darker_gray"
+        android:text="문제유형" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginBottom="2dp"
+        android:layout_toEndOf="@+id/asdasd"
+        android:layout_toRightOf="@+id/asdasd"
+        android:background="@android:color/darker_gray"
+        android:text="문제ID" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="3dp"
+        android:layout_marginBottom="2dp"
+        android:layout_toRightOf="@+id/textView17"
+        android:background="@android:color/darker_gray"
+        android:text="질문" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="195dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/count"
+        android:layout_alignLeft="@+id/count"
+        android:layout_alignRight="@+id/rate"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/darker_gray"
+        android:text="최근 푼 날짜" />
+
+    <TextView
+        android:id="@+id/asdasd3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/type"
+        android:layout_alignLeft="@+id/asdasd"
+        android:layout_alignRight="@+id/asdasd"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/darker_gray"
+        android:text="맞힌 횟수" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id"
+        android:layout_alignLeft="@+id/id"
+        android:layout_alignRight="@+id/id"
+        android:layout_alignParentTop="false"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/darker_gray"
+        android:text="오답률" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/asdasd"
+        android:layout_alignLeft="@+id/asdasd"
+        android:layout_alignRight="@+id/asdasd"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/textView17"
+        android:layout_alignLeft="@+id/textView17"
+        android:layout_alignRight="@+id/textView17"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="105dp"
+        android:layout_below="@+id/textView18"
+        android:layout_alignLeft="@+id/textView18"
+        android:layout_alignRight="@+id/textView18"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/background_light"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/asdasd3"
+        android:layout_alignLeft="@+id/asdasd3"
+        android:layout_alignRight="@+id/asdasd3"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/textView27"
+        android:layout_alignLeft="@+id/textView27"
+        android:layout_alignRight="@+id/textView27"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/textView28"
+        android:layout_alignLeft="@+id/textView28"
+        android:layout_alignRight="@+id/textView28"
+        android:layout_marginBottom="2dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:text="0" />
+
+</RelativeLayout>
