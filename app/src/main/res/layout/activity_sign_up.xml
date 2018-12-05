@@ -11,25 +11,44 @@
         android:layout_centerVertical="true"
         tools:context=".LoginActivity">
 
-        <EditText
-            android:id="@+id/signup_id"
+
+        <LinearLayout
+            android:id="@+id/layout_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/login_signin"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="false"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="10dp"
-            android:ems="10"
-            android:hint="ID"
-            android:inputType="textPersonName" />
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="10dp">
+
+            <EditText
+                android:id="@+id/signup_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:ems="6"
+                android:hint="ID"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/button_validate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:onClick="onClickValidate"
+                android:text="중복확인" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/signup_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/signup_id"
+            android:layout_below="@+id/layout_id"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="false"
             android:layout_marginLeft="10dp"
@@ -53,10 +72,52 @@
             android:hint="Password 확인"
             android:inputType="textPassword" />
 
+        <EditText
+            android:id="@+id/signup_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signup_passConfirm"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:ems="10"
+            android:hint="이름"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/signup_birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signup_name"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:ems="10"
+            android:hint="생년월일"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/signup_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signup_birth"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:ems="10"
+            android:hint="이메일"
+            android:inputType="textEmailAddress" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/signup_passConfirm"
+            android:layout_below="@+id/signup_email"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:gravity="center_horizontal"

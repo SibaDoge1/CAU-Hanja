@@ -17,4 +17,10 @@ public class UserStatActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TestHistoryActivity.class);
         startActivity(intent);
     }
+
+    public void onClickQuit(View v){
+        Intent intent = new Intent(this, MenuActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

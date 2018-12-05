@@ -69,7 +69,8 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1.5"
-                android:text="Button" />
+                android:onClick="onClickResult"
+                android:text="(테스트)결과창" />
 
             <Button
                 android:id="@+id/button7"

@@ -13,15 +13,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.melon.cauhanja.Manager.WordManager;
+import com.example.melon.cauhanja.Manager.HistoryManager;
 
 import java.util.ArrayList;
 
 public class TestHistoryActivity extends AppCompatActivity {
     private ListView listView;
-    private WordManager wordManager;
-    private ArrayList<String> wordList;
-    private int level;
+    private ArrayList<String> historyList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +27,8 @@ public class TestHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_history);
 
         Intent intent = getIntent();
-        level = intent.getIntExtra("Level",0);
-
-        wordManager = WordManager.getInstance(this);
-        wordList = wordManager.getWordList(level);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.wordlist_item, wordList){
+/*
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.testhistory_item , historyList){
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -46,7 +40,6 @@ public class TestHistoryActivity extends AppCompatActivity {
         };
         listView = (ListView) findViewById(R.id.wordList);
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -61,5 +54,6 @@ public class TestHistoryActivity extends AppCompatActivity {
                 }
             }
         });
+        */
     }
 }

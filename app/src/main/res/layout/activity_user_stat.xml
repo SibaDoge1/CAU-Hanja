@@ -23,7 +23,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="188dp"
-        android:background="@android:color/background_light"
         android:gravity="center"
         android:stretchColumns="1,2,3">
 
@@ -95,7 +94,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/text_type"
+                android:id="@+id/text_type1"
                 android:layout_width="128dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -107,7 +106,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/text_count"
+                android:id="@+id/text_count1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -138,7 +137,7 @@
             android:layout_height="match_parent">
 
             <CheckBox
-                android:id="@+id/checkBox6"
+                android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -190,7 +189,7 @@
             android:layout_height="match_parent">
 
             <CheckBox
-                android:id="@+id/checkBox8"
+                android:id="@+id/checkBox3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -200,7 +199,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/text_type4"
+                android:id="@+id/text_type3"
                 android:layout_width="128dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -212,7 +211,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/text_count4"
+                android:id="@+id/text_count3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -224,7 +223,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/text_rate4"
+                android:id="@+id/text_rate3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -238,13 +237,23 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/historyButton"
+        android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="44dp"
         android:onClick="onClickHistory"
         android:text="문제보기" />
+
+    <Button
+        android:id="@+id/quit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/history"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:onClick="onClickQuit"
+        android:text="나가기" />
 </RelativeLayout>
