@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                         memberName = jsonResponse.getString("memberName");
 
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                        intent.putExtra("Member_Number",memberNumber);
+                        //intent.putExtra("Member_Number",memberNumber);
                         intent.putExtra("Member_Name",memberName);
                         startActivity(intent);
                         finish();

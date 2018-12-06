@@ -38,8 +38,6 @@ public class TestResultActivity extends AppCompatActivity {
     }
 
     public void OnClickQuit(View v){
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
         finish();
     }
 
