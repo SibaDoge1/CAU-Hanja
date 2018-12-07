@@ -26,6 +26,15 @@ public class UserStatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_stat);
 
+        final TextView type1 = findViewById(R.id.text_type1);
+        TextView count1 = findViewById(R.id.text_count1);
+        TextView rate1 = findViewById(R.id.text_rate1);
+        TextView type2 = findViewById(R.id.text_type2);
+        TextView count2 = findViewById(R.id.text_count2);
+        TextView rate2 = findViewById(R.id.text_rate2);
+        TextView type3 = findViewById(R.id.text_type3);
+        TextView count3 = findViewById(R.id.text_count3);
+        TextView rate3 = findViewById(R.id.text_rate3);
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -34,13 +43,19 @@ public class UserStatActivity extends AppCompatActivity {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
                     if (success) {
-                      /*
-                        for(int i=0; i < jsonResponse.length(); i++){
-                            JSONObject entity = jsonResponse.getJSONObject("0");
-                        }*/
-                        JSONObject entity = jsonResponse.getJSONObject("0");
-                        TextView hi = findViewById(R.id.text_type1);
-                        hi.setText(entity.getString("last_solved"));
+                        ArrayList<JSONObject> jArray = new  ArrayList<JSONObject>();
+                        int[] Counts = {0,0,0};
+                        int[] wrongCounts = {0,0,0};
+
+                        for (int i = 0; i < jsonResponse.length()-1; i++){
+                            JSONObject entity = jsonResponse.getJSONObject(Integer.toString(i));
+                            jArray.add(entity);
+                        }
+                        for (int i = 0; i < jsonResponse.length()-1; i++){
+                            JSONObject entity = jsonResponse.getJSONObject(Integer.toString(i));
+                            jArray.add(entity);
+                        }
+                        type1.setText(jArray.get(i).getString("last_solved"));
                     } else {
                         Log.d("Tag", "clicked2");
                         AlertDialog.Builder builder = new AlertDialog.Builder(UserStatActivity.this);
