@@ -28,28 +28,17 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:layout_weight="1"
+                android:onClick="onClickNext"
                 android:text="다음 문제" />
-
-            <TextView
-                android:id="@+id/exam_examNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:text="모의고사 # 1"
-                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/exam_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/exam_examNumber"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
                 android:gravity="center"
-                android:text="남은 시간\n10:00"
                 android:textSize="15sp" />
 
             <TextView
@@ -60,7 +49,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:text="13번"
                 android:textSize="18sp" />
 
             <TextView
@@ -71,7 +59,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:text="다음 문장에서 밑줄 친 단어(單語)나 어구(語句)의 뜻을 가장 잘 나타낸 한자(漢字) 또는 한자어(漢字語)는 어느 것입니까?"
+                android:text="문제 받아오는중.."
                 android:textSize="16sp" />
 
             <TextView
@@ -82,7 +70,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="문제\n\n\n\n\n\n 스크롤"
                 android:textSize="50sp" />
 
             <RadioGroup
@@ -96,20 +83,20 @@
                 android:layout_marginRight="20dp">
 
                 <RadioButton
+                    android:id="@+id/exam_answer1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:onClick="onClickRadioButton" />
+
+                <RadioButton
                     android:id="@+id/exam_answer2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="1번 보기" />
-
-                <RadioButton
-                    android:id="@+id/exam_answer4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="4번보기" />
+                    android:onClick="onClickRadioButton" />
 
                 <RadioButton
                     android:id="@+id/exam_answer3"
@@ -117,15 +104,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="3번 보기" />
+                    android:onClick="onClickRadioButton" />
 
                 <RadioButton
-                    android:id="@+id/exam_answer1"
+                    android:id="@+id/exam_answer4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="2번 보기" />
+                    android:onClick="onClickRadioButton" />
 
                 <RadioButton
                     android:id="@+id/exam_answer5"
@@ -133,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:text="5번보기" />
+                    android:onClick="onClickRadioButton" />
 
             </RadioGroup>
 
