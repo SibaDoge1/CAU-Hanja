@@ -18,11 +18,14 @@ import android.widget.TextView;
 public class PopupActivity extends Activity {
 
     private ListView listView;
+    private int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup);
+
+        mode = getIntent().getIntExtra("Popup_Mode",0);
 
         String[] items = {"8급","7급","6급","5급","준4급","4급","준3급","3급","2급","1급"};
 
@@ -42,10 +45,21 @@ public class PopupActivity extends Activity {
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), WordListActivity.class);
-                intent.putExtra("Level",position);
-                startActivity(intent);
-                finish();
+                Intent intent;
+                switch (mode) {
+                    case 1:
+                        intent = new Intent(getApplicationContext(), ExamActivity.class);
+                        intent.putExtra("Level", position);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case 2:
+                        intent = new Intent(getApplicationContext(), WordListActivity.class);
+                        intent.putExtra("Level", position);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
             }
         });
     }
