@@ -9,9 +9,16 @@
     <ListView
         android:id="@+id/history_list"
         android:layout_width="match_parent"
+<<<<<<< Updated upstream
         android:layout_height="477dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp" />
+=======
+        android:layout_height="484dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="83dp" />
+>>>>>>> Stashed changes
 
 </RelativeLayout>
