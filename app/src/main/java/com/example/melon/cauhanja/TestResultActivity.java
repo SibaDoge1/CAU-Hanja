@@ -43,6 +43,7 @@ public class TestResultActivity extends AppCompatActivity {
 
     public void OnClickHistory(View v){
         Intent intent = new Intent(this, TestHistoryActivity.class);
+        intent.putExtra("checkData", 7);
         startActivity(intent);
         finish();
     }

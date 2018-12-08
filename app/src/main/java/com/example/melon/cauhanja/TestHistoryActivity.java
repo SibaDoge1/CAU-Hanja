@@ -12,9 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.example.melon.cauhanja.Manager.HistoryManager;
-
 import java.util.ArrayList;
 
 public class TestHistoryActivity extends AppCompatActivity {

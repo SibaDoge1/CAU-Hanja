@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (success) {
                         String memberID = jsonResponse.getString("memberID");
                         String memberPW = jsonResponse.getString("memberPW");
-                        memberNumber = jsonResponse.getInt("memberNumber");
+                        //memberNumber = jsonResponse.getInt("memberNumber");
                         memberName = jsonResponse.getString("memberName");
 
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);

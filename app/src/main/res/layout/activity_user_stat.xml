@@ -31,14 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <CheckBox
-                android:id="@+id/checkBox0"
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="@android:color/background_light"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:textSize="18sp" />
 
             <TextView
@@ -61,7 +57,7 @@
                 android:layout_marginBottom="1dp"
                 android:background="?attr/colorButtonNormal"
                 android:gravity="center"
-                android:text="문제 풀이 횟수"
+                android:text="맞춘 횟수"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -84,7 +80,7 @@
             android:layout_height="match_parent">
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/checkBox1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="1dp"
@@ -101,7 +97,7 @@
                 android:layout_marginBottom="1dp"
                 android:background="#f0f0f0"
                 android:gravity="center"
-                android:text="0"
+                android:text="한자"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -125,7 +121,7 @@
                 android:layout_marginBottom="1dp"
                 android:background="#f0f0f0"
                 android:gravity="center"
-                android:text="0"
+                android:text="0 %"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -154,7 +150,7 @@
                 android:layout_marginBottom="1dp"
                 android:background="#f0f0f0"
                 android:gravity="center"
-                android:text="0"
+                android:text="독해"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -178,7 +174,7 @@
                 android:layout_marginBottom="1dp"
                 android:background="#f0f0f0"
                 android:gravity="center"
-                android:text="0"
+                android:text="0 %"
                 android:textAlignment="center"
                 android:textSize="18sp" />
         </TableRow>
@@ -206,7 +202,7 @@
                 android:layout_marginBottom="1dp"
                 android:background="#f0f0f0"
                 android:gravity="center"
-                android:text="0"
+                android:text="어휘"
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
@@ -230,7 +226,7 @@
                 android:layout_marginBottom="1dp"
                 android:background="#f0f0f0"
                 android:gravity="center"
-                android:text="0"
+                android:text="0 %"
                 android:textAlignment="center"
                 android:textSize="18sp" />
         </TableRow>
