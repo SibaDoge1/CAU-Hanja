@@ -8,13 +8,22 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.melon.cauhanja.Manager.Exam;
 import com.example.melon.cauhanja.Manager.ExamManager;
 
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +33,7 @@ public class ExamActivity extends AppCompatActivity {
     private int level;
 
     private int questionIndex;
+    private int wrongCount;
     private int timeSec;
     private int selectButtonNum;
 
@@ -40,12 +50,14 @@ public class ExamActivity extends AppCompatActivity {
     private TextView questionView;
     private TextView contentView;
 
+    private RadioGroup example;
     private RadioButton ex1;
     private RadioButton ex2;
     private RadioButton ex3;
     private RadioButton ex4;
     private RadioButton ex5;
 
+    private Response.Listener<String> responseListener;
 
     ExamManager examManager;
     ArrayList<Exam> examList;
@@ -68,11 +80,31 @@ public class ExamActivity extends AppCompatActivity {
         ex3 = (RadioButton) findViewById(R.id.exam_answer3);
         ex4 = (RadioButton) findViewById(R.id.exam_answer4);
         ex5 = (RadioButton) findViewById(R.id.exam_answer5);
+        example = (RadioGroup) findViewById(R.id.exam_answerGroup);
+
 
         examManager = ExamManager.getInstance(this);
         examManager.makeExam("테스트용");
 
         questionIndex = 0;
+        wrongCount = 0;
+
+        responseListener = new Response.Listener<String> () {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    if (success) {
+                    }
+                    else {
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
 
         setLoading();
     }
@@ -80,8 +112,8 @@ public class ExamActivity extends AppCompatActivity {
     protected void goToResult() {
         Intent intent = new Intent(this, TestResultActivity.class);
         intent.putExtra("elapsedTime", timeView.getText().toString());
-        intent.putExtra("questionCnt", 30);
-        intent.putExtra("rightAnsCnt", 15);
+        intent.putExtra("questionCnt", questionIndex);
+        intent.putExtra("rightAnsCnt", wrongCount);
         startActivity(intent);
 
         loadTimer.cancel();
@@ -150,16 +182,27 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     public void clearButtion() {
-        ex1.setChecked(false);
-        ex2.setChecked(false);
-        ex3.setChecked(false);
-        ex4.setChecked(false);
-        ex5.setChecked(false);
+        example.clearCheck();
         selectButtonNum = 0;
     }
 
     public void sendResult(){
+        String isWrong;
+        if(examList.get(questionIndex).getAnswer() == selectButtonNum){
+            //정답
+            isWrong = "1";
+        }
+        else{
+            //오답
+            isWrong = "0";
+            wrongCount++;
+        }
 
+        String qid = String.valueOf(examList.get(questionIndex).getId());
+
+        solveRequest sRequest = new solveRequest(qid, memberID, isWrong, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(sRequest);
     }
 
     public void OnClickTest(View v) {
@@ -190,6 +233,8 @@ public class ExamActivity extends AppCompatActivity {
     public void onClickNext(View v) {
         if (questionIndex + 1 < examList.size()) {
             if(selectButtonNum != 0) {
+                sendResult();
+
                 questionIndex++;
                 clearButtion();
                 setQuestion();
@@ -203,4 +248,21 @@ public class ExamActivity extends AppCompatActivity {
         }
     }
 
+}
+class solveRequest extends StringRequest {
+    final static private String URL = "https://jeffjks.cafe24.com/rateUpdate.php";
+    private Map<String, String> parameters;
+
+    public solveRequest(String qid, String userid, String isWrong ,Response.Listener<String> listener) {
+        super(Method.POST, URL, listener, null);
+        parameters = new HashMap<>();
+        parameters.put("question_id", qid);
+        parameters.put("uesr_id", userid);
+        parameters.put("isWrong", isWrong);
+    }
+
+    @Override
+    public Map<String, String> getParams() {
+        return parameters;
+    }
 }

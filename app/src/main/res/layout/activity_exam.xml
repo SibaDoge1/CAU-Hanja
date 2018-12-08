@@ -70,7 +70,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
 
             <RadioGroup
                 android:id="@+id/exam_answerGroup"
@@ -88,7 +88,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:onClick="onClickRadioButton" />
+                    android:onClick="onClickRadioButton"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/exam_answer2"
@@ -96,7 +97,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:onClick="onClickRadioButton" />
+                    android:onClick="onClickRadioButton"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/exam_answer3"
@@ -104,7 +106,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:onClick="onClickRadioButton" />
+                    android:onClick="onClickRadioButton"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/exam_answer4"
@@ -112,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:onClick="onClickRadioButton" />
+                    android:onClick="onClickRadioButton"
+                    android:textSize="20sp" />
 
                 <RadioButton
                     android:id="@+id/exam_answer5"
@@ -120,7 +124,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:onClick="onClickRadioButton" />
+                    android:onClick="onClickRadioButton"
+                    android:textSize="20sp" />
 
             </RadioGroup>
 

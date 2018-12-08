@@ -133,8 +133,8 @@ public class ExamManager {
 
         // 테스트용 10문제
         Random r = new Random();
-        for(int inx = 0; inx < 10; inx ++){
-            questionNumberList.add(inx + 1);
+        for(int inx = 0; inx < 20; inx ++){
+            questionNumberList.add(r.nextInt(326) + 1);
         }
         //
 

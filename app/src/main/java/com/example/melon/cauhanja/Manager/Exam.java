@@ -22,13 +22,13 @@ public class Exam {
 
     public void setContent(String buf) {
 
-        buf = buf.replaceFirst("①","\t");
-        buf = buf.replaceFirst("②","\t");
-        buf = buf.replaceFirst("③","\t");
-        buf = buf.replaceFirst("④","\t");
-        buf = buf.replaceFirst("⑤","\t");
-
-        String[] str = buf.split("\t");
+        buf = buf.replaceFirst("①","-es");
+        buf = buf.replaceFirst("②","-es");
+        buf = buf.replaceFirst("③","-es");
+        buf = buf.replaceFirst("④","-es");
+        buf = buf.replaceFirst("⑤","-es");
+        buf = buf.replaceAll("\n","");
+        String[] str = buf.split("-es");
 
         content = str[0];
         example.add(str[1]);
