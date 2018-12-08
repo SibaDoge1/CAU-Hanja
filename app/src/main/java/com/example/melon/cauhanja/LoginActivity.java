@@ -12,6 +12,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.melon.cauhanja.Manager.ExamManager;
 
 import org.json.JSONObject;
 
@@ -24,8 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText login_id;
     private EditText login_pass;
 
-    private int memberNumber; // DB로 부터 받아오는 회원 id (키)
     private String memberName;
+    private String memberID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
 
         login_id = (EditText) findViewById(R.id.signup_id);
         login_pass = (EditText) findViewById(R.id.login_password);
-        memberNumber = 0;
     }
 
     public void onClickLogin(View v) {
@@ -50,12 +51,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (success) {
                         String memberID = jsonResponse.getString("memberID");
                         String memberPW = jsonResponse.getString("memberPW");
-                        //memberNumber = jsonResponse.getInt("memberNumber");
                         memberName = jsonResponse.getString("memberName");
 
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                        //intent.putExtra("Member_Number",memberNumber);
                         intent.putExtra("Member_Name",memberName);
+                        intent.putExtra("Member_ID",memberID);
                         startActivity(intent);
                         finish();
                     }
@@ -87,7 +87,8 @@ public class LoginActivity extends AppCompatActivity {
         //TODO Button3 click event
         //메뉴창으로 이동 - 로그인안될때
         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-        intent.getIntExtra("Member_Number",memberNumber);
+        intent.putExtra("Member_Name","테스트");
+        intent.putExtra("Member_ID","test1");
         startActivity(intent);
         finish();
     }

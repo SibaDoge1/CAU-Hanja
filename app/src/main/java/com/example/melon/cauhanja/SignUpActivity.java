@@ -87,6 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
         String passConf = signup_passConf.getText().toString();
         String name = signup_name.getText().toString();
         String birth = signup_birth.getText().toString();
+        birth = birth.substring(0,4) + "-" + birth.substring(4,6) + "-" + birth.substring(6,8);
         String email = signup_email.getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
 
@@ -105,6 +106,11 @@ public class SignUpActivity extends AppCompatActivity {
         }
         else if (pass.length() < 4) {
             dialog = builder.setMessage("비밀번호는 4자 이상이어야 합니다.").setPositiveButton("OK", null).create();
+            dialog.show();
+            return;
+        }
+        else if(birth.length() != 10){
+            dialog = builder.setMessage("생년월일을 입력해주세요.").setNegativeButton("OK", null).create();
             dialog.show();
             return;
         }

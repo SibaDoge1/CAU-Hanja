@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private int memberNumber;
+    private String memberID;
     private String memnerName;
 
     private TextView menu_Member;
@@ -22,20 +22,22 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent;
         intent = getIntent();
 
-        memberNumber = intent.getIntExtra("Member_Number",0);
+        memberID = intent.getStringExtra("Member_ID");
         memnerName = intent.getStringExtra("Member_Name");
         menu_Member = (TextView)findViewById(R.id.menu_member);
 
-        menu_Member.setText("회원번호 : " + memberNumber);
+        menu_Member.setText(memnerName + "님 환영합니다.");
     }
 
     public void onClickExam(View v){
-        Intent intent = new Intent(this,ExamActivity.class);
+        Intent intent = new Intent(this, PopupActivity.class);
+        intent.putExtra("Popup_Mode",1);
         startActivity(intent);
     }
 
     public void onClickWord(View v){
         Intent intent = new Intent(this, PopupActivity.class);
+        intent.putExtra("Popup_Mode",2);
         startActivity(intent);
     }
 
