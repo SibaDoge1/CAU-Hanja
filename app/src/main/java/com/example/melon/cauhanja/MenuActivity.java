@@ -58,4 +58,10 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void onClickQuit(View v) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

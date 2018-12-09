@@ -1,33 +1,41 @@
 package com.example.melon.cauhanja;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
+import com.example.melon.cauhanja.Manager.HistoryManager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TestHistoryActivity extends AppCompatActivity {
     private ListView listView;
-    private JSONObject historyObject;
-    private ArrayList<Map<String, String>> historyArray = new ArrayList<>();
+    private RelativeLayout loading;
+    private EditText type;
+    private EditText wrong;
+    private EditText rate;
+    private ArrayList<Map<String, String>> historyArray;
+    private ArrayList<Map<String, String>> filteredArray = new ArrayList<Map<String, String>>();
+    private ArrayList<String> typeFilter;
+    private Timer loadTimer;
+    private TimerTask loadTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,64 +43,47 @@ public class TestHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_history);
 
         Intent intent = getIntent();
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Tag", "down Success");
-                try {
-                    historyObject = new JSONObject(response);
-                    JSONtoArray();
-                } catch (Exception e) {
-                    Log.d("Tag", e.getMessage() + e.getStackTrace());
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        HistoryRequest historyRequest = new HistoryRequest(MenuActivity.getMemberID(), responseListener);
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(historyRequest);
-/*
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.testhistory_item , historyArray){
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View v = convertview;
-
-                if(v == null){
-                    viewHolder = new ViewHolder();
-                    v = inflater.inflate(R.layout.list_row, null);
-                    viewHolder.tv_title = (TextView)v.findViewById(R.id.tv_title);
-                    viewHolder.iv_image = (ImageView)v.findViewById(R.id.iv_image);
-                    viewHolder.btn_button = (Button)v.findViewById(R.id.btn_button);
-                    viewHolder.cb_box = (CheckBox)v.findViewById(R.id.cb_box);
-
-                    v.setTag(viewHolder);
-
-                }else {
-                    viewHolder = (ViewHolder)v.getTag();
-                }
-
-                viewHolder.tv_title.setText(getItem(position).title);
-
-                viewHolder.iv_image.setOnClickListener(buttonClickListener);
-                viewHolder.iv_image.setTag(position);
-
-                viewHolder.btn_button.setText(getItem(position).button);
-                viewHolder.btn_button.setOnClickListener(buttonClickListener);
-                viewHolder.btn_button.setTag(position);
-
-                viewHolder.cb_box.setTag(position);
-                viewHolder.cb_box.setOnClickListener(buttonClickListener);
-
-                return v;
-            }
-        };
-
+        typeFilter = intent.getStringArrayListExtra("typeFilter");
+        loading = findViewById(R.id.loading);
+        type = findViewById(R.id.type);
+        wrong = findViewById(R.id.wrong);
+        rate = findViewById(R.id.rate);
         listView = (ListView) findViewById(R.id.history_list);
+
+        setLoading();
+
+    }
+
+    public void setLoading() {
+        loadTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (HistoryManager.isDownloaded()) {
+                            historyArray = HistoryManager.getHistoryArray();
+                            loading.setVisibility(View.GONE);
+                            onDownload();
+                            loadTimer.cancel();
+                        }
+                    }
+                });
+            }
+        };
+
+        loadTimer = new Timer();
+        loadTimer.schedule(loadTask, 0, 500);
+    }
+
+    public void onDownload() {
+        historyArray = doFilter(typeFilter, -1, -1);
+        historyAdapter adapter = new historyAdapter(TestHistoryActivity.this, R.layout.testhistory_item, historyArray);
+        Log.d("Tag", "adapter");
         listView.setAdapter(adapter);
 
+        loading.setVisibility(View.GONE);
+        /*
         listView.setOnItemClickListener(new ListView.OnItemClickListener() {
 
             @Override
@@ -107,38 +98,120 @@ public class TestHistoryActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
-        });
-        */
+        });*/
+
+        Log.d("Tag", "set adapter");
+
     }
 
-    public void JSONtoArray() {
-        try {
-            boolean success = historyObject.getBoolean("success");
-            if (success) {
-                Log.d("Tag", "success");
-                int[] counts = {0, 0, 0}; //한자, 독해, 어휘
-                int[] wrongCounts = {0, 0, 0};
+    public void onClickFilter(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog dialog;
+        ArrayList<String> typeFilterArray = new ArrayList<String>();
+        String typeFilter = "";
+        int wrongFilter = -1;
+        float rateFilter = -1;
 
-                for (int i = 0; i < historyObject.length() - 1; i++) {
-                    JSONObject entity = historyObject.getJSONObject(Integer.toString(i));
-                    Map<String, String> map = new HashMap<>();
-                    map.put("q_id", entity.getString("q_id"));
-                    map.put("count", entity.getString("count"));
-                    map.put("wrong_count", entity.getString("wrong_count"));
-                    map.put("error_rate", entity.getString("error_rate"));
-                    map.put("last_solved", entity.getString("last_solved"));
-                    map.put("type", entity.getString("type"));
-                    map.put("content", entity.getString("content"));
-                    map.put("answer", entity.getString("answer"));
-                    map.put("question", entity.getString("question"));
-                    historyArray.add(map);
-                }
-            } else {
-                Log.d("Tag", "failed");
+        if (type.getText().toString().length() > 0) {
+            typeFilter = type.getText().toString();
+            if (!typeFilter.equals("한자") && !typeFilter.equals("독해") && !typeFilter.equals("어휘")) {
+                dialog = builder.setMessage("올바른 문제 유형을 적어주세요").setPositiveButton("OK", null).create();
+                dialog.show();
+                return;
             }
-        } catch (Exception e) {
-            Log.d("Tag", e.getMessage() + e.getStackTrace());
-            e.printStackTrace();
+            typeFilterArray.add(typeFilter);
         }
+        if (wrong.getText().toString().length() > 0)
+            wrongFilter = Integer.parseInt(wrong.getText().toString());
+        if (rate.getText().toString().length() > 0)
+            rateFilter = (Float.parseFloat(rate.getText().toString()))/(float)100;
+
+        filteredArray = doFilter(typeFilterArray, wrongFilter, rateFilter);
+        historyAdapter adapter = new historyAdapter(TestHistoryActivity.this, R.layout.testhistory_item, filteredArray);
+        listView.setAdapter(adapter);
+    }
+
+    public ArrayList<Map<String, String>> doFilter(ArrayList<String> _typeFilter, int wrongFilter, float rateFilter) {
+        ArrayList<Map<String, String>> resultArray = new ArrayList<Map<String, String>>();
+        boolean[] filterOption = {true, true, true};
+        boolean isOk;
+
+        if (_typeFilter.size() == 0) filterOption[0] = false;
+        if (wrongFilter < 0) filterOption[1] = false;
+        if (Float.compare(rateFilter, 0) == -1) filterOption[2] = false;
+
+        for (int i = 0; i < historyArray.size(); i++) {
+            isOk = true;
+            for (int j = 0; j < _typeFilter.size(); j++) {
+                if (filterOption[0] && !historyArray.get(i).get("type").equals(_typeFilter.get(j)))
+                    isOk = false;
+            }
+            if (filterOption[1] && Integer.parseInt(historyArray.get(i).get("wrong_count")) <= wrongFilter)
+                isOk = false;
+
+            Log.d("tag", "ho");
+            if (filterOption[2] && Float.compare(Float.parseFloat(historyArray.get(i).get("error_rate")), rateFilter) != 1)
+                isOk = false;
+            if (isOk) {
+                resultArray.add(historyArray.get(i));
+            }
+        }
+        return resultArray;
     }
 }
+
+
+class historyAdapter extends ArrayAdapter<Map<String, String>> {
+    private ArrayList<Map<String, String>> historyArray = new ArrayList<Map<String, String>>();
+    private Context mContext;
+
+    public historyAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Map<String, String>> objects) {
+        super(context, resource, objects);
+        mContext = context;
+        historyArray = objects;
+    }
+
+    @Override
+    public int getCount() {
+        return historyArray.size();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.testhistory_item, parent, false);
+        }
+
+        TextView type = (TextView) convertView.findViewById(R.id.type);
+        TextView id = (TextView) convertView.findViewById(R.id.id);
+        TextView question = (TextView) convertView.findViewById(R.id.question);
+        TextView count = (TextView) convertView.findViewById(R.id.count);
+        TextView rate = (TextView) convertView.findViewById(R.id.rate);
+        TextView date = (TextView) convertView.findViewById(R.id.date);
+        Map<String, String> historyItem = historyArray.get(position);
+
+        // 아이템 내 각 위젯에 데이터 반영
+        type.setText(historyItem.get("type"));
+        id.setText(historyItem.get("q_id"));
+        question.setText(historyItem.get("question") + " : \n" + historyItem.get("content"));
+        count.setText(historyItem.get("wrong_count") + " / " + historyItem.get("count"));
+        rate.setText(Float.parseFloat(historyItem.get("error_rate"))*(float)100 + " %");
+        date.setText(historyItem.get("last_solved"));
+
+        Log.d("Tag", "entity set");
+        return convertView;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public Map<String, String> getItem(int position) {
+        return historyArray.get(position);
+    }
+}
+

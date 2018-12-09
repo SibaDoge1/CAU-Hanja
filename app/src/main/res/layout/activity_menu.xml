@@ -79,7 +79,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="50dp"
                 android:layout_weight="1.5"
-                android:text="Button" />
+                android:onClick="onClickQuit"
+                android:text="로그아웃" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

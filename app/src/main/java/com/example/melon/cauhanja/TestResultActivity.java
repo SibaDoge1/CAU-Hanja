@@ -43,7 +43,10 @@ public class TestResultActivity extends AppCompatActivity {
 
     public void OnClickHistory(View v){
         Intent intent = new Intent(this, TestHistoryActivity.class);
-        intent.putExtra("checkData", 7);
+        ArrayList<String> typeFilter = new ArrayList<String>();
+        typeFilter.add("한자");
+        typeFilter.add("독해");
+        typeFilter.add("어휘");
         startActivity(intent);
         finish();
     }
