@@ -5,7 +5,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -84,7 +83,7 @@ public class ExamActivity extends AppCompatActivity {
 
 
         examManager = ExamManager.getInstance(this);
-        examManager.makeExam("테스트용");
+        examManager.makeExam(memberID);
 
         questionIndex = 0;
         wrongCount = 0;
@@ -112,8 +111,8 @@ public class ExamActivity extends AppCompatActivity {
     protected void goToResult() {
         Intent intent = new Intent(this, TestResultActivity.class);
         intent.putExtra("elapsedTime", timeView.getText().toString());
-        intent.putExtra("questionCnt", questionIndex);
-        intent.putExtra("rightAnsCnt", wrongCount);
+        intent.putExtra("questionCnt", questionIndex + 1);
+        intent.putExtra("rightAnsCnt", questionIndex - wrongCount + 1);
         startActivity(intent);
 
         loadTimer.cancel();

@@ -31,6 +31,7 @@ public class ExamManager {
     private ArrayList<Integer> questionNumberList;
     private Response.Listener<String> responseListener;
     private boolean isDone;
+    private String level;
 
     private ExamManager(Context context){
         mContext = context;
@@ -42,6 +43,8 @@ public class ExamManager {
 
         AssetManager am = mContext.getResources().getAssets();
         InputStream is =  null;
+
+        level = "3";
 
         try {
             is = am.open("Category.txt");
@@ -56,37 +59,36 @@ public class ExamManager {
         }catch (Exception e){
         }
 
-
-
         responseListener = new Response.Listener<String> () {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean success = jsonResponse.getBoolean("success");
-                    if (success) {
-                        Exam e = new Exam();
+                    if(success) {
+                        for (int inx = 0; inx < 20; inx++) {
+                            Log.i("examTest", "exam Make Flag 2 / " + inx);
 
-                        e.setId(Integer.parseInt(jsonResponse.getString("id")));
-                        e.setLevel(Integer.parseInt(jsonResponse.getString("level")));
-                        e.setAnswer(Integer.parseInt(jsonResponse.getString("answer")));
-                        e.setErrorRate(Integer.parseInt(jsonResponse.getString("errorRate")));
+                            JSONObject jo = jsonResponse.getJSONObject(String.valueOf(inx));
 
-                        e.setContent(jsonResponse.getString("content"));
+                            Log.i("examTest", "12345");
 
-                        String c = jsonResponse.getString("category");
-                        int subc = Integer.parseInt(jsonResponse.getString("subcategory"));
+                            Exam e = new Exam();
+                            e.setId(Integer.parseInt(jo.getString("qid")));
+                            e.setLevel(Integer.parseInt(jo.getString("level")));
+                            e.setAnswer(Integer.parseInt(jo.getString("answer")));
+                            e.setErrorRate(Integer.parseInt(jo.getString("rate")));
 
-                        e.setType(getType(c) + subc);
-                        e.setQuestion(category.get(e.getType()));
+                            e.setContent(jo.getString("content"));
+                            e.setType(Integer.parseInt(jo.getString("type")));
+                            e.setQuestion(category.get(e.getType()));
 
-                        examList.add(e);
-                        if(examList.size() == questionNumberList.size()){
-                            isDone = true;
+                            examList.add(e);
                         }
 
-                    }
-                    else {
+                        isDone = true;
+                    }else{
+
                     }
                 }
                 catch (Exception e) {
@@ -103,34 +105,18 @@ public class ExamManager {
         return instance;
     }
 
-    public void addQuestion(int id){
-        getQuesiontRequest gqs = new getQuesiontRequest(String.valueOf(id), responseListener);
-        RequestQueue queue = Volley.newRequestQueue(mContext.getApplicationContext());
-        queue.add(gqs);
-    }
-
-    public int getType(String category){
-        int type = 0;
-        switch (category){
-            case "독해" :
-                type = 100;
-                break;
-            case "어휘" :
-                type = 200;
-                break;
-            case "한자" :
-                type = 300;
-                break;
-        }
-        return type;
-    }
-
     public void makeExam(String userID){
         examList = new ArrayList<>();
         questionNumberList = new ArrayList<>();
 
         isDone = false;
 
+        getQuestionListRequsest gqs = new getQuestionListRequsest(userID,level, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(mContext.getApplicationContext());
+        queue.add(gqs);
+        Log.i("examTest","exam Make Flag 5");
+
+        /*
         // 테스트용 10문제
         Random r = new Random();
         for(int inx = 0; inx < 20; inx ++){
@@ -141,6 +127,8 @@ public class ExamManager {
         for(int inx = 0; inx < questionNumberList.size(); inx ++){
             addQuestion(questionNumberList.get(inx));
         }
+        */
+
     }
 
     public boolean isDone() {
@@ -155,14 +143,17 @@ public class ExamManager {
         return examList.size();
     }
 }
-class getQuesiontRequest extends StringRequest {
-    final static private String URL = "https://jeffjks.cafe24.com/getQuestion.php";
+
+
+class getQuestionListRequsest extends StringRequest {
+    final static private String URL = "https://jeffjks.cafe24.com/getQuestionsToShow.php";
     private Map<String, String> parameters;
 
-    public getQuesiontRequest(String qid, Response.Listener<String> listener) {
+    public getQuestionListRequsest(String user_id,String level, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null); // 해당 정보를 POST 방식으로 URL에 전송
         parameters = new HashMap<>();
-        parameters.put("questionID", qid);
+        parameters.put("userID", user_id);
+        parameters.put("problemLevel", level);
     }
 
     @Override
