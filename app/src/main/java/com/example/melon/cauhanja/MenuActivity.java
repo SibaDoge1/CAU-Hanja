@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private String memberID;
-    private String memnerName;
+    private static String memberID;
+    private static String memnerName;
 
     private TextView menu_Member;
 
@@ -29,6 +29,9 @@ public class MenuActivity extends AppCompatActivity {
         menu_Member.setText(memnerName + "님 환영합니다.");
     }
 
+    public static String getMemberID(){
+        return memberID;
+    }
     public void onClickExam(View v){
         Intent intent = new Intent(this, PopupActivity.class);
         intent.putExtra("Popup_Mode",1);

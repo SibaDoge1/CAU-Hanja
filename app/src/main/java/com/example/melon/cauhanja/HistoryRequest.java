@@ -1,4 +1,4 @@
-package com.example.melon.cauhanja.Manager;
+package com.example.melon.cauhanja;
 
 import android.content.Context;
 import android.content.res.AssetManager;

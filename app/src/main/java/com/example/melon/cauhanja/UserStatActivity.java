@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.melon.cauhanja.Manager.HistoryRequest;
 
 import org.json.JSONObject;
 
@@ -27,7 +26,7 @@ public class UserStatActivity extends AppCompatActivity {
     private CheckBox cb1;
     private CheckBox cb2;
     private CheckBox cb3;
-    private JSONObject historyList;
+    private JSONObject historyObject;
     private String userId;
 
     @Override
@@ -49,41 +48,8 @@ public class UserStatActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d("Tag", "down Success");
                 try {
-                    historyList = new JSONObject(response);
-                    boolean success = historyList.getBoolean("success");
-                    if (success) {
-                        Log.d("Tag", "success");
-                        int[] counts = {0, 0, 0}; //한자, 독해, 어휘
-                        int[] wrongCounts = {0, 0, 0};
-
-                        for (int i = 0; i < historyList.length() - 1; i++) {
-                            JSONObject entity = historyList.getJSONObject(Integer.toString(i));
-                            switch (entity.getString("type")) {
-                                case "한자":
-                                    counts[0] += entity.getInt("count");
-                                    wrongCounts[0] += entity.getInt("wrong_count");
-                                    break;
-                                case "독해":
-                                    counts[1] += entity.getInt("count");
-                                    wrongCounts[1] += entity.getInt("wrong_count");
-                                    break;
-                                case "어휘":
-                                    counts[2] += entity.getInt("count");
-                                    wrongCounts[2] += entity.getInt("wrong_count");
-                                    break;
-                            }
-                        }
-                        count1.setText(wrongCounts[0] + " / " + counts[0]);
-                        count2.setText(wrongCounts[1] + " / " + counts[1]);
-                        count3.setText(wrongCounts[2] + " / " + counts[2]);
-                        if (counts[0] != 0)
-                            rate1.setText(((float) wrongCounts[0] / (float) counts[0]) * 100 + " %");
-                        if (counts[1] != 0)
-                            rate2.setText(((float) wrongCounts[1] / (float) counts[1]) * 100 + " %");
-                        if (counts[2] != 0)
-                            rate3.setText(((float) wrongCounts[2] / (float) counts[2]) * 100 + " %");
-                    }
-                    else{ Log.d("Tag", "failed");}
+                    historyObject = new JSONObject(response);
+                    onDownload();
                 } catch (Exception e) {
                     Log.d("Tag", e.getMessage() + e.getStackTrace());
                     e.printStackTrace();
@@ -91,11 +57,54 @@ public class UserStatActivity extends AppCompatActivity {
             }
         };
 
-        HistoryRequest historyRequest = new HistoryRequest("test1", responseListener);
+        HistoryRequest historyRequest = new HistoryRequest(MenuActivity.getMemberID(), responseListener);
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(historyRequest);
+
     }
 
+    public void onDownload() {
+        try {
+            boolean success = historyObject.getBoolean("success");
+            if (success) {
+                Log.d("Tag", "success");
+                int[] counts = {0, 0, 0}; //한자, 독해, 어휘
+                int[] wrongCounts = {0, 0, 0};
+
+                for (int i = 0; i < historyObject.length() - 1; i++) {
+                    JSONObject entity = historyObject.getJSONObject(Integer.toString(i));
+                    switch (entity.getString("type")) {
+                        case "한자":
+                            counts[0] += entity.getInt("count");
+                            wrongCounts[0] += entity.getInt("wrong_count");
+                            break;
+                        case "독해":
+                            counts[1] += entity.getInt("count");
+                            wrongCounts[1] += entity.getInt("wrong_count");
+                            break;
+                        case "어휘":
+                            counts[2] += entity.getInt("count");
+                            wrongCounts[2] += entity.getInt("wrong_count");
+                            break;
+                    }
+                }
+                count1.setText(wrongCounts[0] + " / " + counts[0]);
+                count2.setText(wrongCounts[1] + " / " + counts[1]);
+                count3.setText(wrongCounts[2] + " / " + counts[2]);
+                if (counts[0] != 0)
+                    rate1.setText(((float) wrongCounts[0] / (float) counts[0]) * 100 + " %");
+                if (counts[1] != 0)
+                    rate2.setText(((float) wrongCounts[1] / (float) counts[1]) * 100 + " %");
+                if (counts[2] != 0)
+                    rate3.setText(((float) wrongCounts[2] / (float) counts[2]) * 100 + " %");
+            } else {
+                Log.d("Tag", "failed");
+            }
+        } catch (Exception e) {
+            Log.d("Tag", e.getMessage() + e.getStackTrace());
+            e.printStackTrace();
+        }
+    }
 
     public void onClickHistory(View v) {
         int checkData = 0;
