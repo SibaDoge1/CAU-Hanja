@@ -65,14 +65,14 @@
         android:text="나가기" />
 
     <Button
-        android:id="@+id/hitory"
+        android:id="@+id/stat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/history"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="20dp"
         android:onClick="OnClickHistory"
-        android:text="내역보기" />
+        android:text="내역 보기" />
 
     <TextView
         android:id="@+id/elapsed_time"

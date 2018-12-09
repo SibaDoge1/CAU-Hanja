@@ -3,6 +3,7 @@ package com.example.melon.cauhanja;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,13 +39,17 @@ public class TestResultActivity extends AppCompatActivity {
     }
 
     public void OnClickQuit(View v){
-        Intent intent = new Intent(this, MenuActivity.class);
-        startActivity(intent);
         finish();
     }
 
     public void OnClickHistory(View v){
         Intent intent = new Intent(this, TestHistoryActivity.class);
+        ArrayList<String> typeFilter = new ArrayList<String>();
+        typeFilter.add("한자");
+        typeFilter.add("독해");
+        typeFilter.add("어휘");
+        intent.putExtra("typeFilter", typeFilter);
+        intent.putExtra("reDownload", true);
         startActivity(intent);
         finish();
     }
