@@ -19,6 +19,7 @@ public class PopupActivity extends Activity {
 
     private ListView listView;
     private int mode;
+    private String memberID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class PopupActivity extends Activity {
         setContentView(R.layout.activity_popup);
 
         mode = getIntent().getIntExtra("Popup_Mode",0);
+        memberID = getIntent().getStringExtra("Member_ID");
 
         String[] items = {"8급","7급","6급","5급","준4급","4급","준3급","3급","2급","1급"};
 
@@ -50,6 +52,7 @@ public class PopupActivity extends Activity {
                     case 1:
                         intent = new Intent(getApplicationContext(), ExamActivity.class);
                         intent.putExtra("Level", position);
+                        intent.putExtra("Member_ID",memberID);
                         startActivity(intent);
                         finish();
                         break;

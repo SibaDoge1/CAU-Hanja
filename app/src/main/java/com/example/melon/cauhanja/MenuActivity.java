@@ -35,6 +35,7 @@ public class MenuActivity extends AppCompatActivity {
     public void onClickExam(View v){
         Intent intent = new Intent(this, PopupActivity.class);
         intent.putExtra("Popup_Mode",1);
+        intent.putExtra("Member_ID",memberID);
         startActivity(intent);
     }
 
