@@ -117,6 +117,7 @@ public class UserStatActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, TestHistoryActivity.class);
         intent.putExtra("typeFilter", typeFilter);
+        intent.putExtra("reDownload", false);
         startActivity(intent);
     }
 

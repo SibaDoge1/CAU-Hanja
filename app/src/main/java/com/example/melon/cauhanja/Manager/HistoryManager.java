@@ -22,6 +22,7 @@ public class HistoryManager {
     private static Context mContext;
 
     public static void downHistory(Context context) {
+        isDownloaded = false;
         mContext = context;
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -34,7 +35,6 @@ public class HistoryManager {
                 }
             }
         };
-
         HistoryRequest historyRequest = new HistoryRequest(MenuActivity.getMemberID(), responseListener);
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(historyRequest);

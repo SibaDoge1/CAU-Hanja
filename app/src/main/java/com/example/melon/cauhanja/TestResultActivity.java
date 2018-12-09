@@ -3,6 +3,7 @@ package com.example.melon.cauhanja;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,6 +48,8 @@ public class TestResultActivity extends AppCompatActivity {
         typeFilter.add("한자");
         typeFilter.add("독해");
         typeFilter.add("어휘");
+        intent.putExtra("typeFilter", typeFilter);
+        intent.putExtra("reDownload", true);
         startActivity(intent);
         finish();
     }

@@ -34,6 +34,7 @@ public class TestHistoryActivity extends AppCompatActivity {
     private ArrayList<Map<String, String>> historyArray;
     private ArrayList<Map<String, String>> filteredArray = new ArrayList<Map<String, String>>();
     private ArrayList<String> typeFilter;
+    private boolean reDownload;
     private Timer loadTimer;
     private TimerTask loadTask;
 
@@ -44,12 +45,15 @@ public class TestHistoryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         typeFilter = intent.getStringArrayListExtra("typeFilter");
+        reDownload = intent.getBooleanExtra("reDownload", true);
+
         loading = findViewById(R.id.loading);
         type = findViewById(R.id.type);
         wrong = findViewById(R.id.wrong);
         rate = findViewById(R.id.rate);
         listView = (ListView) findViewById(R.id.history_list);
 
+        if(reDownload) HistoryManager.downHistory(this);
         setLoading();
 
     }
@@ -79,7 +83,6 @@ public class TestHistoryActivity extends AppCompatActivity {
     public void onDownload() {
         historyArray = doFilter(typeFilter, -1, -1);
         historyAdapter adapter = new historyAdapter(TestHistoryActivity.this, R.layout.testhistory_item, historyArray);
-        Log.d("Tag", "adapter");
         listView.setAdapter(adapter);
 
         loading.setVisibility(View.GONE);
@@ -134,28 +137,41 @@ public class TestHistoryActivity extends AppCompatActivity {
     public ArrayList<Map<String, String>> doFilter(ArrayList<String> _typeFilter, int wrongFilter, float rateFilter) {
         ArrayList<Map<String, String>> resultArray = new ArrayList<Map<String, String>>();
         boolean[] filterOption = {true, true, true};
-        boolean isOk;
-
+        Log.d("tag", "safasf " + _typeFilter);
         if (_typeFilter.size() == 0) filterOption[0] = false;
         if (wrongFilter < 0) filterOption[1] = false;
         if (Float.compare(rateFilter, 0) == -1) filterOption[2] = false;
 
         for (int i = 0; i < historyArray.size(); i++) {
-            isOk = true;
-            for (int j = 0; j < _typeFilter.size(); j++) {
-                if (filterOption[0] && !historyArray.get(i).get("type").equals(_typeFilter.get(j)))
-                    isOk = false;
-            }
-            if (filterOption[1] && Integer.parseInt(historyArray.get(i).get("wrong_count")) <= wrongFilter)
-                isOk = false;
+            boolean[] isOk = {false, false, false};
 
-            Log.d("tag", "ho");
-            if (filterOption[2] && Float.compare(Float.parseFloat(historyArray.get(i).get("error_rate")), rateFilter) != 1)
-                isOk = false;
-            if (isOk) {
+            if(filterOption[0]){
+                for (int j = 0; j < _typeFilter.size(); j++) {
+                    if (historyArray.get(i).get("type").equals(_typeFilter.get(j))) {
+                        isOk[0] = true;
+                        break;
+                    }
+                }
+            }
+            else isOk[0] = true;
+
+            if (filterOption[1]) {
+                if (Integer.parseInt(historyArray.get(i).get("wrong_count")) > wrongFilter)
+                    isOk[1] = true;
+            }
+            else isOk[1] = true;
+
+            if (filterOption[2]) {
+                if (Float.compare(Float.parseFloat(historyArray.get(i).get("error_rate")), rateFilter) == 1)
+                    isOk[2] = true;
+            }
+            else isOk[2] = true;
+
+            if (isOk[0] &&isOk[1] && isOk[2]) {
                 resultArray.add(historyArray.get(i));
             }
         }
+
         return resultArray;
     }
 }
