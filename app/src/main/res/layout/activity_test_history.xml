@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="false"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
             android:text="문제 유형" />
@@ -56,6 +56,19 @@
             android:layout_centerVertical="false"
             android:onClick="onClickFilter"
             android:text="조회" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="false"
+            android:onClick="onClickQuit"
+            android:text="나가기"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/type"

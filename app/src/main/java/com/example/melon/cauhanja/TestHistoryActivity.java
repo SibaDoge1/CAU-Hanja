@@ -134,6 +134,10 @@ public class TestHistoryActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    public void onClickQuit(View v){
+        finish();
+    }
+
     public ArrayList<Map<String, String>> doFilter(ArrayList<String> _typeFilter, int wrongFilter, float rateFilter) {
         ArrayList<Map<String, String>> resultArray = new ArrayList<Map<String, String>>();
         boolean[] filterOption = {true, true, true};

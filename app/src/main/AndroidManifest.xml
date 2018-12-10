@@ -41,7 +41,8 @@
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity
             android:name=".TestHistoryActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".UserStatActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
