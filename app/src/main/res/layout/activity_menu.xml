@@ -32,6 +32,8 @@
                 android:id="@+id/menu_exam"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:onClick="onClickExam"
                 android:text="모의고사" />
@@ -40,19 +42,12 @@
                 android:id="@+id/button5"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:onClick="onClickStat"
                 android:text="통계보기" />
 
-            <Button
-                android:id="@+id/menu_word"
-                android:layout_width="50dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:onClick="onClickWord"
-                android:text="한자보기" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,22 +58,22 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/menu_word"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_weight="1.5"
-                android:onClick="onClickResult"
-                android:text="(테스트)결과창" />
+                android:layout_weight="1"
+                android:onClick="onClickWord"
+                android:text="한자보기" />
 
             <Button
                 android:id="@+id/button7"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="50dp"
-                android:layout_weight="1.5"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:onClick="onClickQuit"
                 android:text="로그아웃" />
         </LinearLayout>

@@ -204,10 +204,6 @@ public class ExamActivity extends AppCompatActivity {
         queue.add(sRequest);
     }
 
-    public void OnClickTest(View v) {
-        goToResult();
-    }
-
     public void onClickRadioButton(View v) {
         RadioButton b = (RadioButton)v;
         switch (b.getId()){

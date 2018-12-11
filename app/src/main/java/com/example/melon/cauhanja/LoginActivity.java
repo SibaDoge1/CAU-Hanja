@@ -83,16 +83,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void ondClickButton3(View v){
-        //TODO Button3 click event
-        //메뉴창으로 이동 - 로그인안될때
-        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-        intent.putExtra("Member_Name","테스트");
-        intent.putExtra("Member_ID","test1");
-        startActivity(intent);
-        finish();
-    }
-
     @Override
     protected void onStop() {
         super.onStop();

@@ -50,15 +50,6 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickResult(View v) {
-        Intent intent = new Intent(this, TestResultActivity.class);
-        intent.putExtra("elapsedTime", "10:00");
-        intent.putExtra("questionCnt", 30);
-        intent.putExtra("rightAnsCnt", 15);
-        startActivity(intent);
-
-    }
-
     public void onClickQuit(View v) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
